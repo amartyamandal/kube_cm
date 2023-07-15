@@ -8,6 +8,7 @@ node_config:
   - config1
   - config2
   - config3
+  - config4
 
 rbac:
   - type: roles
