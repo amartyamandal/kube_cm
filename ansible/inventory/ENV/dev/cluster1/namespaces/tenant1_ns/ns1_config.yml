@@ -1,0 +1,16 @@
+---
+network_policies:
+  - policy1
+  - policy2
+  - policy3
+
+roles:
+  - role1
+  - role2
+  - role3
+
+rolebindings:
+  - rolebinding1
+  - rolebinding2
+  - rolebinding3
+...

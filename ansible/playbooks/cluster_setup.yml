@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  vars_files:
+    - ../inventory/{{ env }}/cluster/{{ cluster_name }}/cluster_config.yml
+  tasks:
+    - name: Generate network policies
+      template:
+        src: "../GOLDEN_TEMPLATES/cluster/network_policies/{{ item }}.j2"
+        dest: "../inventory/{{ env }}/cluster/{{ cluster_name }}/config/network_policies/{{ item }}.yml"
+      loop: "{{ network_policies }}"
+
+    - name: Generate node configurations
+      template:
+        src: "../GOLDEN_TEMPLATES/cluster/node_config/{{ item }}.j2"
+        dest: "../inventory/{{ env }}/cluster/{{ cluster_name }}/config/node_config/{{ item }}.yml"
+      loop: "{{ node_config }}"
+
+    - name: Generate RBAC configurations
+      template:
+        src: "../GOLDEN_TEMPLATES/cluster/rbac/{{ item.type }}/{{ item.name }}.j2"
+        dest: "../inventory/{{ env }}/cluster/{{ cluster_name }}/config/rbac/{{ item.type }}/{{ item.name }}.yml"
+      loop: "{{ rbac }}"
+
+    - name: Generate tool configurations
+      template:
+        src: "../GOLDEN_TEMPLATES/cluster/tool_config/{{ item }}.j2"
+        dest: "../inventory/{{ env }}/cluster/{{ cluster_name }}/config/tool_config/{{ item }}.yml"
+      loop: "{{ tool_config }}"
+...

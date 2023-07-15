@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  vars_files:
+    - ../inventory/{{ env }}/cluster/{{ cluster_name }}/cluster_config.yml
+  tasks:
+    - name: Generate tool configurations
+      template:
+        src: "../helm/charts/{{ item }}/{{ item }}.j2"
+        dest: "../helm/values/{{ env }}/cluster/{{ cluster_name }}/{{ item }}.yml"
+      loop: "{{ tool_config }}"
+...

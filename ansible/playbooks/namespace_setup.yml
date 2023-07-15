@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  vars_files:
+    - ../inventory/{{ env }}/cluster/{{ cluster_name }}/namespaces/{{ namespace_name }}/namespace_config.yml
+  tasks:
+    - name: Generate network policies
+      template:
+        src: "../GOLDEN_TEMPLATES/namespace/network_policies/{{ item }}.j2"
+        dest: "../inventory/{{ env }}/cluster/{{ cluster_name }}/namespaces/{{ namespace_name }}/config/network_policies/{{ item }}.yml"
+      loop: "{{ network_policies }}"
+
+    - name: Generate roles and role bindings
+      template:
+        src: "../GOLDEN_TEMPLATES/namespace/rbac/{{ item.type }}/{{ item.name }}.j2"
+        dest: "../inventory/{{ env }}/cluster/{{ cluster_name }}/namespaces/{{ namespace_name }}/config/rbac/{{ item.type }}/{{ item.name }}.yml"
+      loop: "{{ rbac }}"
+...

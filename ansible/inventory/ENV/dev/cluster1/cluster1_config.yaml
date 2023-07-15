@@ -1,0 +1,26 @@
+---
+network_policies:
+  - policy1
+  - policy2
+  - policy3
+
+node_config:
+  - config1
+  - config2
+  - config3
+
+rbac:
+  - type: roles
+    name: role1
+  - type: rolebindings
+    name: rolebinding1
+  - type: clusterroles
+    name: clusterrole1
+  - type: clusterrolebindings
+    name: clusterrolebinding1
+
+tool_config:
+  - tool1
+  - tool2
+  - tool3
+...
